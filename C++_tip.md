@@ -330,3 +330,16 @@ char str[5]={′C′,′h′,′i′,′n′,′a′};
 | 0111 1100 | 124    | 7C       | \|   |
 | 0111 1101 | 125    | 7D       | }    |
 | 0111 1110 | 126    | 7E       | ~    |
+
+
+
+## 环形链表的解释
+
+有一个对环形链表的解释非常清晰
+
+![image-20210113224933362](C:\Users\DLSH\AppData\Roaming\Typora\typora-user-images\image-20210113224933362.png)
+
+![image-20210113225047171](C:\Users\DLSH\AppData\Roaming\Typora\typora-user-images\image-20210113225047171.png)
+
+![image-20210113225107962](C:\Users\DLSH\AppData\Roaming\Typora\typora-user-images\image-20210113225107962.png)
+
