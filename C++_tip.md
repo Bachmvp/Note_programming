@@ -343,3 +343,164 @@ char str[5]={′C′,′h′,′i′,′n′,′a′};
 
 ![image-20210113225107962](C:\Users\DLSH\AppData\Roaming\Typora\typora-user-images\image-20210113225107962.png)
 
+## Vector 删除元素
+
+| 函数                  | 功能                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| pop_back()            | 删除 vector 容器中最后一个元素，该容器的大小（size）会减 1，但容量（capacity）不会发生改变。 |
+| erase(pos)            | 删除 vector 容器中 pos 迭代器指定位置处的元素，并返回指向被删除元素下一个位置元素的迭代器。该容器的大小（size）会减 1，但容量（capacity）不会发生改变。 |
+| swap(beg)、pop_back() | 先调用 swap() 函数交换要删除的目标元素和容器最后一个元素的位置，然后使用 pop_back() 删除该目标元素。 |
+| erase(beg,end)        | 删除 vector 容器中位于迭代器 [beg,end)指定区域内的所有元素，并返回指向被删除区域下一个位置元素的迭代器。该容器的大小（size）会减小，但容量（capacity）不会发生改变。 |
+| remove()              | 删除容器中所有和指定元素值相等的元素，并返回指向最后一个元素下一个位置的迭代器。值得一提的是，调用该函数不会改变容器的大小和容量。 |
+| clear()               | 删除 vector 容器中所有的元素，使其变成空的 vector 容器。该函数会改变 vector 的大小（变为 0），但不是改变其容量。 |
+
+## C++输入输出流对字符串的应用
+
+输入输出流在某些情况下很必要，而且非常方便和快速
+
+首先有三种输入输出流
+
+1.基于控制台
+
+```c++
+#include <iostream> 
+```
+
+这就是打印或者接受控制台的交互信息
+
+istream 读取流
+
+ostream 写入流
+
+iostream 对流读写
+
+2.基于文件
+
+```c++
+#include <fstream>
+```
+
+写入文件，保存数据或者读取文件
+
+ifstream 读取文件
+
+ostream 写入文件
+
+fstream 对文件读写
+
+3.基于字符串，在算法题中使用得当的话很方便，而且主要是很快
+
+```c++
+#include <sstream>
+```
+
+istringstream 从string读
+
+ostringstream 写入string
+
+stringstream 读写string
+
+1. istringstream类
+
+   描述：从流中提取数据，支持 >> 操作
+
+   这里字符串可以包括多个单词，单词之间使用**空格**分开,多个单词都是**string**
+
+   1. istringstream的构造函数原形： 
+   2. istringstream::istringstream(string str); 
+
+   初始化：使用**字符串**进行初始化
+
+   1. istringstream istr("1 56.7"); 
+   2. istr.str("1 56.7");//把字符串"1 56.7"存入字符串流中 
+
+**str()：使istringstream对象返回一个string字符串**
+
+```c++
+1. istringstream istr("1 56.7"); 
+2.  
+3.   cout<<istr.str()<<endl;//直接输出字符串的数据 "1 56.7"  
+4.    
+5.   string str = istr.str();//函数str()返回一个字符串  
+6.   cout<<str<<endl; 
+7.    
+8.   int n; 
+9.   double d; 
+10.  
+11.   //以空格为界，把istringstream中数据取出，应进行类型转换  
+12.   istr>>n;//第一个数为整型数据，输出1  
+13.   istr>>d;//第二个数位浮点数，输出56.7  
+14.  
+15.   //假设换下存储类型  
+16.   istr>>d;//istringstream第一个数要自动变成浮点型，输出仍为1  
+17.   istr>>n;//istringstream第二个数要自动变成整型，有数字的阶段，输出为56 
+```
+
+用流来转格式非常方便
+
+还有一种功能,**把一行字符串放入流中，单词以空格隔开。之后把一个个单词从流中依次读取到字符串**
+
+```c++
+istringstream istr;  
+    string line,str;  
+    while (getline(cin,line))//从终端接收一行字符串，并放入字符串line中   
+    {  
+        istr.str(line);//把line中的字符串存入字符串流中   
+        while(istr >> str)//每次读取一个单词（以空格为界），存入str中   
+        {  
+            cout<<str<<endl;  
+        }  
+    }  
+```
+
+每次读取一个stirng，最后有终止符\0就自动跳出了
+
+## unordered_map 哈希表
+
+今天做题遇到了哈希表，有点忘了，写了个w.second()一直错，才发现pair的第一个和第二个是没有括号的，顺便把stl哈希表的一些信息记一下
+
+unordered_map和map类似，都是存储的key-value的值，可以通过key快速索引到value。不同的是**unordered_map不会根据key的大小进行排序**，存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是无序的。unordered_map的底层是一个防冗余的哈希表（开链法避免地址冲突）。unordered_map的key需要定义hash_value函数并且重载operator ==。
+
+哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，时间复杂度为O(1)；而代价仅仅是消耗比较多的内存。哈希表的查询时间虽然是O(1)，但是并不是unordered_map查询时间一定比map短，因为实际情况中还要考虑到数据量，而且unordered_map的hash函数的构造速度也没那么快，所以不能一概而论，应该具体情况具体分析。
+
+```c++
+#include<string>  
+#include<iostream>  
+#include<unordered_map>
+using namespace std;  
+  
+int main()
+{
+	unordered_map<string, int>  dict; // 声明unordered_map对象
+	
+	// 插入数据的三种方式
+	dict.insert(pair<string,int>("apple",2));
+	dict.insert(unordered_map<string, int>::value_type("orange",3));
+	dict["banana"] = 6;
+	
+	// 判断是否有元素
+	if(dict.empty())
+		cout<<"该字典无元素"<<endl;
+	else
+		cout<<"该字典共有"<<dict.size()<<"个元素"<<endl;
+	
+	// 遍历
+	unordered_map<string, int>::iterator iter;
+	for(iter=dict.begin();iter!=dict.end();iter++)
+		cout<<iter->first<<ends<<iter->second<<endl;
+	
+	// 查找
+	if(dict.count("boluo")==0)
+		cout<<"can't find boluo!"<<endl;
+	else
+		cout<<"find boluo!"<<endl;
+	
+	if((iter=dict.find("banana"))!=dict.end())
+		cout<<"banana="<<iter->second<<endl;
+	else
+		cout<<"can't find boluo!"<<endl;
+	
+	return 0;
+}
+```
+
