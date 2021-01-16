@@ -385,7 +385,7 @@ void heapSort(vector<int>& array){
         heapBuild(array,0,i);
     }
 }
-
+//快速排序是非常常用的排序方法，时间O（nlogn）
 void quickSort(vector<int>& array,int left, int right){
     if(left<right){
         int i=left;
@@ -446,8 +446,27 @@ void shellSort(vector<int>& array){
 //}
 
 //优先级队列的比较方式更复杂，需要声明为类
+//优先级队列默认是大顶堆：a<b. 也就是顶在后面，升序
+//less<int> 大顶堆
+//greater<int> 小顶堆
 //struct Comp {
 //bool operator() (ListNode* l1, ListNode* l2) {
-//    return l1->val > l2->val;
+//    return l1->val > l2->val;//这是小顶堆，降序
 //}
+//};
+
+//关于set和map，这两个也可以排序，所以也可以定义自己的排序方式。set默认也是升序，从小到大。
+//可以通过定义结构体(或类)，并在其中重载()运算符，来自定义排序函数。
+//然后，在定义set的时候，将结构体加入其中例如如下代码中的set<int, intComp>和set<string, strComp >。
+//struct intComp {
+//    bool operator() (const int& lhs, const int& rhs) const {
+//        return lhs > rhs;
+//    }
+//};
+
+//struct strComp
+//{
+//    bool operator() (const string& str1, const string& str2) const {
+//        return str1.length() < str2.length();
+//    }
 //};
